@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Changing ID Card</title>
+  <style>
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.id-card {
+  width: 300px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.photo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  background-color: #cccccc;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  background-image: url(download\ \(1\).jpeg);
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+  </style>
+</head>
+<body>
+  <div class="id-card">
+    <h2>ID Card</h2>
+    <div class="photo"></div>
+    <div class="info">
+      <p>Name: John Doe</p>
+      <p>Occupation: Developer</p>
+    </div>
+    <div class="controls">
+      <button onclick="previousColor()">Previous Color</button>
+      <button onclick="nextColor()">Next Color</button>
+    </div>
+  </div>
+</body>
+</html>
+
+<script>
+
+const colors = ["#007bff", "#28a745", "#ffc107", "#dc3545", "#17a2b8"];
+
+let currentIndex = 0;
+
+
+function previousColor() {
+  currentIndex--;
+  if (currentIndex < 0) {
+    currentIndex = colors.length - 1;
+  }
+  applyColor();
+}
+
+
+function nextColor() {
+  currentIndex++;
+  if (currentIndex >= colors.length) {
+    currentIndex = 0;
+  }
+  applyColor();
+}
+
+
+function applyColor() {
+  const idCard = document.querySelector('.id-card');
+  idCard.style.backgroundColor = colors[currentIndex];
+}
+
+// Initially apply the first color
+applyColor();
+
+</script>

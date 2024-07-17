@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        thead,
+        td,
+        tr,
+        th,
+        tbody {
+            border-collapse: collapse;
+            padding: 15px;
+            border: 1px solid black;
+        }
+
+        #forEdit {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="forAdd">
+        <input id="input" type="text">
+        <button onclick="add()"> add </button>
+    </div>
+
+    <div id="forEdit">
+        <input id="editInput" type="text">
+        <button onclick="edit()"> edit </button>
+    </div>
+
+    <table>
+        <thead>
+            <th> s/n</th>
+            <th> todo </th>
+            <th> edit </th>
+            <th> delete </th>
+        </thead>
+        <tbody id="tbody">
+
+
+
+        </tbody>
+    </table>
+
+</body>
+
+</html>
+<script>
+    // "use strict"
+    let index
+    let dataBase = []
+    // let count = 0
+    function add() {
+        if (input.value.trim() === '') {
+            alert('todo is required')
+        } else {
+            // count++
+            // tbody.innerHTML += `<tr> <td>${count}</td> <td> ${input.value} </td> </tr> `
+            let todoObj = {
+                todo: input.value
+            }
+
+            dataBase.push(todoObj)
+            display()
+            console.log(dataBase);
+            input.value = ``;
+
+        }
+
+    }
+
+    function display(params) {
+        tbody.innerHTML = ''
+        for (let index = 0; index < dataBase.length; index++) {
+            tbody.innerHTML += `<tr> <td>${index + 1}</td> <td> ${dataBase[index].todo} </td> <td> <button onclick="grabIndex(${index})"> edit </button> </td> 
+                <td> <button onclick="handleDelete()"> delete </button> </td></tr>  `
+        }
+    }
+
+    function grabIndex(i) {
+        index = i
+        console.log(i);
+        editInput.value = dataBase[i].todo
+        forAdd.style.display = 'none'
+        forEdit.style.display = 'block'
+    }
+    // grabIndex(2)
+    // grabIndex(5)
+    // grabIndex(9)
+
+
+
+    function edit() {
+        let todoObj = {
+            todo: editInput.value
+        }
+        dataBase.splice(index, 1, todoObj)
+        display()
+        forAdd.style.display = 'block'
+        forEdit.style.display = 'none'
+        console.log(dataBase);
+    }
+
+    function handleDelete(i) {
+        dataBase.splice(i, 1)
+        display()
+    }
+
+
+
+
+</script>
