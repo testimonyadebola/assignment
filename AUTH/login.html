@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+    font-family: 'Nunito', sans-serif;
+    color: #384047;
+}
+
+form {
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+}
+
+h1 {
+    margin: 0 0 30px 0;
+    text-align: center;
+}
+
+input[type="email"], input[type="password"] {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 15px;
+    width: 90%;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    margin-bottom: 10px;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="" method="post">
+                <h1>Login</h1>
+                <label for="email">Email:</label>
+                <input type="email" id="mail" name="user_email">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="user_password">
+                <button type="button" id="loginButton" onclick="login()">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<script>
+let database = JSON.parse(localStorage.getItem('jobDataBase')) || []
+
+function login() {
+    let mail = document.getElementById('mail').value
+    let password = document.getElementById('password').value
+
+    if (mail.trim() === '' || password.trim() === '') {
+        alert('Please fill all fields')
+    } else {
+        let user = database.find((user) => user.mail === mail)
+        if (user) {
+            let hashedPassword = hashPassword(password)
+            if (user.password === hashedPassword) {
+                alert('You have successfully logged in')
+                window.location.href = 'dashboard.html'
+            } else {
+                alert('Invalid password')
+            }
+        } else {
+            alert('User not found')
+        }
+    }
+}
+
+function hashPassword(password) {
+    return password.split('').reverse().join('')
+}
+
+
+</script>
+

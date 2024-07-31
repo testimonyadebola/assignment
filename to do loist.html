@@ -79,7 +79,7 @@
         tbody.innerHTML = ''
         for (let index = 0; index < dataBase.length; index++) {
             tbody.innerHTML += `<tr> <td>${index + 1}</td> <td> ${dataBase[index].todo} </td> <td> <button onclick="grabIndex(${index})"> edit </button> </td> 
-                <td> <button onclick="handleDelete()"> delete </button> </td></tr>  `
+                <td> <button onclick="handleDelete(${index})"> delete </button> </td></tr>  `
         }
     }
 
